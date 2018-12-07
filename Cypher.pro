@@ -11,10 +11,19 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = Cypher
 TEMPLATE = app
 
+QMAKE_CXXFLAGS += -std=c++11
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    algorithmes.cpp \
+    affichagetext.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    algorithmes.h \
+    affichagetext.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    affichagetext.ui
+
+OTHER_FILES += \
+    README.txt
