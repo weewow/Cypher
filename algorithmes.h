@@ -9,5 +9,6 @@ class QVector;
 
 
 QString CrypterCesar(const QString &textClair, int decallage, const QVector<QChar> &alphabet);
+QString DecrypterCesar(const QString &textClair, int decallage, const QVector<QChar> &alphabet);
 
 #endif // ALGORITHMES_H

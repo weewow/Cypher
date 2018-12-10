@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     listAlaphabets<< "autre";
     cesar_model_list_alphabets = new QStringListModel(listAlaphabets);
     ui->cesar_choix_alphabet->setModel(cesar_model_list_alphabets);
+    ui->cesar_choix_alphabet->setCurrentIndex(cesar_model_list_alphabets->index(0, 0));
     //
     ui->cesar_label_alphabet_personnalise->setVisible(false);
     ui->cesar_alphabet_personnalise->setVisible(false);
@@ -43,12 +44,31 @@ void MainWindow::AfficherAlphabetPersonnalise()
 
 }
 
+void MainWindow::PreparerAlphabetCesar(QVector<QChar> &Alphabet)
+{
+    QModelIndex index(ui->cesar_choix_alphabet->currentIndex());
+    QString choixAlphabet(cesar_model_list_alphabets->data(index, Qt::DisplayRole).toString());
+    if (choixAlphabet == "alphabet à 26 lettres")
+    {
+        for(QChar lettre : "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+        {
+            Alphabet.push_back(lettre);
+        }
+    }else if(choixAlphabet == "autre"){
+        for(QChar lettre : ui->cesar_alphabet_personnalise->text())
+        {
+            Alphabet.push_back(lettre);
+        }
+    } // Laisser le vector Alphabet vide si on travail sur la table ASCII
+}
+
 void MainWindow::Crypter()
 {
-    QString textrypte("");
-
     // Texte clair
     QString textClair(ui->texteClairCrypte->toPlainText());
+
+    // Texte crypté
+    QString textCrypte("");
 
     // Algorithme choisi
     QString choixAlgorithme(ui->SelecteurAlgo->tabText(ui->SelecteurAlgo->currentIndex()).toLower());
@@ -57,34 +77,37 @@ void MainWindow::Crypter()
         // Récupérer les paramètres de cryptage
         int decallage(ui->cesar_decallage->value());
         QVector<QChar> Alphabet;
-        QModelIndex index(ui->cesar_choix_alphabet->currentIndex());
-        QString choixAlphabet(cesar_model_list_alphabets->data(index, Qt::DisplayRole).toString());
-        if (choixAlphabet == "alphabet à 26 lettres")
-        {
-            for(QChar lettre : "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
-            {
-                Alphabet.push_back(lettre);
-            }
-        }else if(choixAlphabet == "autre"){
-            for(QChar lettre : ui->cesar_alphabet_personnalise->text())
-            {
-                Alphabet.push_back(lettre);
-            }
-        } // Laisser le vector Alphabet vide si on travail sur la table ASCII
+        PreparerAlphabetCesar(Alphabet);
 
-
-        // Appel de la classe de cryptage adéquate
-        textrypte = CrypterCesar(textClair, decallage, Alphabet);
+        textCrypte = CrypterCesar(textClair, decallage, Alphabet);
 
         // Afficher le résultat
-        AffichageText *fenetre = new AffichageText(this, textrypte);
-//        fenetre.setVisible(true);
+        AffichageText *fenetre = new AffichageText(this, textCrypte);
         fenetre->show();
-//        QMessageBox::information(this, "Texte crypté", textrypte);
     }
 }
 
 void MainWindow::Decrypter()
 {
+    // Texte crypté
+    QString textCrypte(ui->texteClairCrypte->toPlainText());
 
+    // Texte clair
+    QString textClair("");
+
+    // Algorithme choisi
+    QString choixAlgorithme(ui->SelecteurAlgo->tabText(ui->SelecteurAlgo->currentIndex()).toLower());
+
+    if (choixAlgorithme=="césar") {
+        // Récupérer les paramètres de cryptage
+        int decallage(ui->cesar_decallage->value());
+        QVector<QChar> Alphabet;
+        PreparerAlphabetCesar(Alphabet);
+
+        textClair = DecrypterCesar(textCrypte, decallage, Alphabet);
+
+        // Afficher le résultat
+        AffichageText *fenetre = new AffichageText(this, textClair);
+        fenetre->show();
+    }
 }

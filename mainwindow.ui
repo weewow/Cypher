@@ -13,6 +13,11 @@
   <property name="windowTitle">
    <string>Cypher</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>images/logo.png</normaloff>
+    <normalon>:/new/LogoApplication/images/logo.png</normalon>images/logo.png</iconset>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout_3">
     <item>
@@ -47,6 +52,9 @@
                <width>150</width>
                <height>16777215</height>
               </size>
+             </property>
+             <property name="maximum">
+              <number>999</number>
              </property>
             </widget>
            </item>
@@ -225,6 +233,22 @@
     <hint type="destinationlabel">
      <x>344</x>
      <y>549</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>Decrypter()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>519</x>
+     <y>533</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>535</x>
+     <y>550</y>
     </hint>
    </hints>
   </connection>

@@ -1,6 +1,6 @@
 TODO:
--faire le décryptage pour le code de césar
--bug quand le texte clair vaut "abcd", la clé 1 et l'alphabet "a"
+-CrypterCesar gérer les clés négatives?
+-utiliser des smart pointers
 -activer/désactiver les boutons crypter et décrypter si le texte à traiter est renseigné/vide
 -ajouter l'option de lire un fichier
 -ajouter l'option de pouvoir enregistrer le texte analysé

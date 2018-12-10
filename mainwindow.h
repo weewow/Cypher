@@ -4,6 +4,9 @@
 #include <QMainWindow>
 
 class QStringListModel;
+//class QChar;
+template
+class QVector<QChar>;
 
 namespace Ui {
 class MainWindow;
@@ -25,6 +28,8 @@ public slots:
 private:
     Ui::MainWindow *ui;
     QStringListModel * cesar_model_list_alphabets;
+
+    void PreparerAlphabetCesar(QVector<QChar> &Alphabet);
 };
 
 #endif // MAINWINDOW_H

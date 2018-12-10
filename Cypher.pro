@@ -27,3 +27,6 @@ FORMS    += mainwindow.ui \
 
 OTHER_FILES += \
     README.txt
+
+RESOURCES += \
+    Icons.qrc
