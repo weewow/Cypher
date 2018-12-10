@@ -27,7 +27,7 @@ public slots:
 
 private:
     Ui::MainWindow *ui;
-    QStringListModel * cesar_model_list_alphabets;
+    QStringListModel *cesar_model_list_alphabets;
 
     void PreparerAlphabetCesar(QVector<QChar> &Alphabet);
 };

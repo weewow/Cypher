@@ -7,8 +7,6 @@
 #include <QModelIndexList>
 #include <QMessageBox>
 
-// Commentaire à supprimer, test git pull depuis Qt-creator
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -31,14 +29,18 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
-    delete cesar_model_list_alphabets;
+//    delete cesar_model_list_alphabets;
 }
 
 void MainWindow::AfficherAlphabetPersonnalise()
 {
     // Récupérer le choix de l'alphabet
     QItemSelectionModel *selectionModel = ui->cesar_choix_alphabet->selectionModel();
-    QString choix = cesar_model_list_alphabets->data(selectionModel->currentIndex(), Qt::DisplayRole).toString();
+    QString choix("autre");
+    if (cesar_model_list_alphabets)
+    {
+        choix = cesar_model_list_alphabets->data(selectionModel->currentIndex(), Qt::DisplayRole).toString();
+    }
 
     // Si l'alphabet vaut "autre" alors on affiche des champs supplémentaires
     ui->cesar_label_alphabet_personnalise->setVisible(choix=="autre");
@@ -49,7 +51,12 @@ void MainWindow::AfficherAlphabetPersonnalise()
 void MainWindow::PreparerAlphabetCesar(QVector<QChar> &Alphabet)
 {
     QModelIndex index(ui->cesar_choix_alphabet->currentIndex());
-    QString choixAlphabet(cesar_model_list_alphabets->data(index, Qt::DisplayRole).toString());
+    QString choixAlphabet("");
+    if (cesar_model_list_alphabets)
+    {
+        choixAlphabet = cesar_model_list_alphabets->data(index, Qt::DisplayRole).toString();
+    }
+
     if (choixAlphabet == "alphabet à 26 lettres")
     {
         for(QChar lettre : "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
