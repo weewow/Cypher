@@ -7,6 +7,8 @@
 #include <QModelIndexList>
 #include <QMessageBox>
 
+// Commentaire à supprimer, test git pull depuis Qt-creator
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
