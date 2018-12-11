@@ -3,11 +3,19 @@
 #include <QVector>
 #include <QChar>
 
+#define TAILLE_TABLE_ASCII 128
+
 QString CrypterCesar(const QString &textClair, int decallage, const QVector<QChar> &alphabet)
 {
     QString result("");
     int pos(0);
     QChar LettreCryptee;
+
+    if (decallage<0)
+    {
+        int loTailleAlphabet(alphabet.size()?alphabet.size():TAILLE_TABLE_ASCII);
+        decallage = loTailleAlphabet + (decallage%loTailleAlphabet);
+    }
 
     if (alphabet.size()) // Utiliser l'alphabet fournit
     {
@@ -25,7 +33,7 @@ QString CrypterCesar(const QString &textClair, int decallage, const QVector<QCha
     }else{// Alphabet vide, on utilise la table ASCII complète
         for(QChar lettre : textClair)
         {
-            LettreCryptee = (lettre.toLatin1() + decallage) % 128;
+            LettreCryptee = (lettre.toLatin1() + decallage) % TAILLE_TABLE_ASCII;
             result.append(LettreCryptee);
         }
     }
@@ -35,5 +43,5 @@ QString CrypterCesar(const QString &textClair, int decallage, const QVector<QCha
 
 QString DecrypterCesar(const QString &textClair, int decallage, const QVector<QChar> &alphabet)
 {
-    return CrypterCesar(textClair, decallage, alphabet);
+    return CrypterCesar(textClair, decallage*-1, alphabet);
 }
