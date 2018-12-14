@@ -15,12 +15,12 @@ QMAKE_CXXFLAGS += -std=c++11
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    algorithmes.cpp \
-    affichagetext.cpp
+    affichagetext.cpp \
+    Algorithmes/cesar.cpp
 
 HEADERS  += mainwindow.h \
-    algorithmes.h \
-    affichagetext.h
+    affichagetext.h \
+    Algorithmes/cesar.h
 
 FORMS    += mainwindow.ui \
     affichagetext.ui
@@ -30,3 +30,5 @@ OTHER_FILES += \
 
 RESOURCES += \
     Icons.qrc
+
+

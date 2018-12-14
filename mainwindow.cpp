@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "algorithmes.h"
+#include "Algorithmes/cesar.h"
 #include "affichagetext.h"
 
 #include <QStringListModel>
@@ -88,7 +88,7 @@ void MainWindow::Crypter()
         QVector<QChar> Alphabet;
         PreparerAlphabetCesar(Alphabet);
 
-        textCrypte = CrypterCesar(textClair, decallage, Alphabet);
+        textCrypte = Cesar::Crypter(textClair, decallage, Alphabet);
 
         // Afficher le résultat
         AffichageText *fenetre = new AffichageText(this, textCrypte);
@@ -113,7 +113,7 @@ void MainWindow::Decrypter()
         QVector<QChar> Alphabet;
         PreparerAlphabetCesar(Alphabet);
 
-        textClair = DecrypterCesar(textCrypte, decallage, Alphabet);
+        textClair = Cesar::Decrypter(textCrypte, decallage, Alphabet);
 
         // Afficher le résultat
         AffichageText *fenetre = new AffichageText(this, textClair);
