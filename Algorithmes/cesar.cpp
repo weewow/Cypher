@@ -44,8 +44,8 @@ namespace Cesar
         return result;
     }
 
-    QString Decrypter(const QString &textClair, int decallage, const QVector<QChar> &alphabet)
+    QString Decrypter(QString const &textCrytpe, int decallage, QVector<QChar> const &alphabet)
     {
-        return Crypter(textClair, decallage*-1, alphabet);
+        return Crypter(textCrytpe, decallage*-1, alphabet);
     }
 }

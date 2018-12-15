@@ -1,11 +1,13 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "Algorithmes/cesar.h"
+#include "Algorithmes/des.h"
 #include "affichagetext.h"
 
 #include <QStringListModel>
 #include <QModelIndexList>
 #include <QMessageBox>
+#include <QBitArray>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -29,7 +31,21 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
-//    delete cesar_model_list_alphabets;
+    delete cesar_model_list_alphabets;
+}
+
+QBitArray MainWindow::QStringToQBitArray(const QString &text, int arraySize)
+{
+    QBitArray result(arraySize);
+    QByteArray byteText(text.toLatin1());
+    for(int i=0; i<byteText.size(); i++)
+    {
+        for(int j=0; j<8; j++)
+        {
+            result[(i*8)+j] = (byteText.at(i) >> j) & 1;
+        }
+    }
+
 }
 
 void MainWindow::AfficherAlphabetPersonnalise()
@@ -89,11 +105,13 @@ void MainWindow::Crypter()
         PreparerAlphabetCesar(Alphabet);
 
         textCrypte = Cesar::Crypter(textClair, decallage, Alphabet);
-
-        // Afficher le résultat
-        AffichageText *fenetre = new AffichageText(this, textCrypte);
-        fenetre->show();
+    }else if(choixAlgorithme=="des"){
+        QString cle(ui->des_cle->text());
+        textCrypte = DES::Crypter(QBitArray:: textClair.toLocal8Bit(), cle.toLocal8Bit());
     }
+    // Afficher le résultat
+    AffichageText *fenetre = new AffichageText(this, textCrypte);
+    fenetre->show();
 }
 
 void MainWindow::Decrypter()

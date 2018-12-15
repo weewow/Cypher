@@ -10,7 +10,7 @@ class QVector;
 namespace Cesar
 {
     QString Crypter(QString const &textClair, int decallage, QVector<QChar> const &alphabet);
-    QString Decrypter(const QString &textClair, int decallage, const QVector<QChar> &alphabet);
+    QString Decrypter(QString const &textCrytpe, int decallage, QVector<QChar> const &alphabet);
 };
 
 #endif // CESAR_H

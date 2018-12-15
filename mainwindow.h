@@ -7,6 +7,7 @@ class QStringListModel;
 //class QChar;
 template
 class QVector<QChar>;
+class QBitArray;
 
 namespace Ui {
 class MainWindow;
@@ -19,6 +20,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    QBitArray QStringToQBitArray(QString const &text, int arraySize);
+
 
 public slots:
     void AfficherAlphabetPersonnalise();
