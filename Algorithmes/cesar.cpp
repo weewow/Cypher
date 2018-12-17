@@ -8,6 +8,14 @@
 
 namespace Cesar
 {
+    /**
+        Réalise le cryptage d'un texte selon l'algorithme de césar
+
+        @param textClair le texte à crytper
+        @param decallage le décallage à appliquer sur le texte clair
+        @param alphabet l'alphabet de cryptage utilisé (si vide alors on utilise la table ASCII
+        @return le texte crypté
+    */
     QString Crypter(QString const &textClair, int decallage, QVector<QChar> const &alphabet)
     {
         QString result("");
@@ -44,6 +52,14 @@ namespace Cesar
         return result;
     }
 
+    /**
+        Réalise le décryptage d'un texte selon l'algorithme de césar
+
+        @param textCrypte le texte à décrytper
+        @param decallage le décallage à appliquer sur le texte clair
+        @param alphabet l'alphabet de cryptage utilisé (si vide alors on utilise la table ASCII
+        @return le texte décrypté
+    */
     QString Decrypter(QString const &textCrytpe, int decallage, QVector<QChar> const &alphabet)
     {
         return Crypter(textCrytpe, decallage*-1, alphabet);

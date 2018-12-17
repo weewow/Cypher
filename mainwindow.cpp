@@ -34,10 +34,16 @@ MainWindow::~MainWindow()
     delete cesar_model_list_alphabets;
 }
 
-QBitArray MainWindow::QStringToQBitArray(const QString &text, int arraySize)
+/**
+    Fonction de conversion d'un QString en QBitArray
+
+    @param text la QString à convertir
+    @return l'équivalent QBitArray du texte à convertir
+*/
+QBitArray MainWindow::QStringToQBitArray(const QString &text)
 {
-    QBitArray result(arraySize);
     QByteArray byteText(text.toLatin1());
+    QBitArray result(byteText.size()*8);
     for(int i=0; i<byteText.size(); i++)
     {
         for(int j=0; j<8; j++)
@@ -45,9 +51,12 @@ QBitArray MainWindow::QStringToQBitArray(const QString &text, int arraySize)
             result[(i*8)+j] = (byteText.at(i) >> j) & 1;
         }
     }
-
+    return result;
 }
 
+/**
+    Gère l'affichage d'une zone du formulaire permettant de donner un alphabet personnalisé pour le cryptage de César
+*/
 void MainWindow::AfficherAlphabetPersonnalise()
 {
     // Récupérer le choix de l'alphabet
@@ -64,6 +73,12 @@ void MainWindow::AfficherAlphabetPersonnalise()
 
 }
 
+/**
+    Permet de charger un alpahbet dans un vector
+    L'alphabet est à retrouver via les options sélectionnées dans l'interfaçe utilisateur
+
+    @param Alphabet le vector à remplir
+*/
 void MainWindow::PreparerAlphabetCesar(QVector<QChar> &Alphabet)
 {
     QModelIndex index(ui->cesar_choix_alphabet->currentIndex());
@@ -87,6 +102,10 @@ void MainWindow::PreparerAlphabetCesar(QVector<QChar> &Alphabet)
     } // Laisser le vector Alphabet vide si on travail sur la table ASCII
 }
 
+/**
+    Lance le cryptage d'un texte clair
+    Les informations comme le texte clair et l'algorithme de cryptage ainsi que les paramètres de cryptage sont à retrouver via l'interfaçe
+*/
 void MainWindow::Crypter()
 {
     // Texte clair
@@ -107,13 +126,17 @@ void MainWindow::Crypter()
         textCrypte = Cesar::Crypter(textClair, decallage, Alphabet);
     }else if(choixAlgorithme=="des"){
         QString cle(ui->des_cle->text());
-        textCrypte = DES::Crypter(QBitArray:: textClair.toLocal8Bit(), cle.toLocal8Bit());
+        textCrypte = DES::Crypter(QStringToQBitArray(textClair), QStringToQBitArray(cle));
     }
     // Afficher le résultat
     AffichageText *fenetre = new AffichageText(this, textCrypte);
     fenetre->show();
 }
 
+/**
+    Lance le décryptage d'un texte clair
+    Les informations comme le texte crypté et l'algorithme de décryptage ainsi que les paramètres de décryptage sont à retrouver via l'interfaçe
+*/
 void MainWindow::Decrypter()
 {
     // Texte crypté

@@ -1,5 +1,6 @@
 TODO:
--implémenter l'algorithme DES
+-implémenter l'algorithme DES avec les wrapper Qt
+-implémenter l'algorithme DES avec les types de base du C++
 -activer/désactiver les boutons crypter et décrypter si le texte à traiter est renseigné/vide
 -ajouter l'option de lire un fichier
 -ajouter l'option de pouvoir enregistrer le texte analysé

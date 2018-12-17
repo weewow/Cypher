@@ -20,7 +20,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    QBitArray QStringToQBitArray(QString const &text, int arraySize);
+    QBitArray QStringToQBitArray(QString const &text);
 
 
 public slots:
