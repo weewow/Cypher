@@ -35,6 +35,7 @@ MainWindow::~MainWindow()
 }
 
 /**
+    @name QStringToQBitArray
     Fonction de conversion d'un QString en QBitArray
 
     @param text la QString à convertir
@@ -48,13 +49,14 @@ QBitArray MainWindow::QStringToQBitArray(const QString &text)
     {
         for(int j=0; j<8; j++)
         {
-            result[(i*8)+j] = (byteText.at(i) >> j) & 1;
+            result[i*8 + j] = (byteText.at(i) >> j) & 1;
         }
     }
     return result;
 }
 
 /**
+    @name AfficherAlphabetPersonnalise
     Gère l'affichage d'une zone du formulaire permettant de donner un alphabet personnalisé pour le cryptage de César
 */
 void MainWindow::AfficherAlphabetPersonnalise()
@@ -74,6 +76,7 @@ void MainWindow::AfficherAlphabetPersonnalise()
 }
 
 /**
+    @name PreparerAlphabetCesar
     Permet de charger un alpahbet dans un vector
     L'alphabet est à retrouver via les options sélectionnées dans l'interfaçe utilisateur
 
@@ -103,6 +106,7 @@ void MainWindow::PreparerAlphabetCesar(QVector<QChar> &Alphabet)
 }
 
 /**
+    @name Crypter
     Lance le cryptage d'un texte clair
     Les informations comme le texte clair et l'algorithme de cryptage ainsi que les paramètres de cryptage sont à retrouver via l'interfaçe
 */
@@ -134,6 +138,7 @@ void MainWindow::Crypter()
 }
 
 /**
+    @name Decrypter
     Lance le décryptage d'un texte clair
     Les informations comme le texte crypté et l'algorithme de décryptage ainsi que les paramètres de décryptage sont à retrouver via l'interfaçe
 */

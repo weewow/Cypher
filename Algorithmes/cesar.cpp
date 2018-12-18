@@ -9,6 +9,7 @@
 namespace Cesar
 {
     /**
+        @name Crypter
         Réalise le cryptage d'un texte selon l'algorithme de césar
 
         @param textClair le texte à crytper
@@ -53,6 +54,7 @@ namespace Cesar
     }
 
     /**
+        @name Decrypter
         Réalise le décryptage d'un texte selon l'algorithme de césar
 
         @param textCrypte le texte à décrytper
