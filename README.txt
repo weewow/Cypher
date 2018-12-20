@@ -1,4 +1,5 @@
 TODO:
+-on part du principe que CHAR_BIT == 8 (architecture matériel et compilateur les plus communs)
 -implémenter l'algorithme DES avec les wrapper Qt
 -implémenter l'algorithme DES avec les types de base du C++
 -pour les objets QBitArray, utiliser testBit() et setBit() au lieu de [] (raison de performance)
